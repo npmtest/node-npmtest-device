@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-device/node_modules/device/lib/device.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-device">npmtest-device (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-device/node_modules/device/lib/device.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">12.16% <small>(9 / 74)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 80)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 7)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">12.86% <small>(9 / 70)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-device/node_modules/device/lib/</a> &#187; device.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* Based on Categorizr (https://github.com/bjankord/Categorizr) by Brett Jankord (http://www.brettjankord.com) */
+&nbsp;
+'use strict';
+&nbsp;
+var useragent = require('useragent');
+&nbsp;
+var defaultOptions = {
+    emptyUserAgentDeviceType: 'desktop',
+    unknownUserAgentDeviceType: 'phone',
+    botUserAgentDeviceType: 'bot',
+    carUserAgentDeviceType: 'car',
+    parseUserAgent: false
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function merge(obj1, obj2) {</span>
+<span class="cstat-no" title="statement not covered" >    var obj3 = {};</span>
+<span class="cstat-no" title="statement not covered" >    if (obj1) { <span class="cstat-no" title="statement not covered" >for (var attrname in obj1) { <span class="cstat-no" title="statement not covered" >obj3[attrname] = obj1[attrname]; </span>} </span>}</span>
+<span class="cstat-no" title="statement not covered" >    if (obj2) { <span class="cstat-no" title="statement not covered" >for (var attrname in obj2) { <span class="cstat-no" title="statement not covered" >obj3[attrname] = obj2[attrname]; </span>} </span>}</span>
+<span class="cstat-no" title="statement not covered" >    return obj3;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function DeviceParser(user_agent, options) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.options = merge(defaultOptions, options);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.make_sure_parser_was_executed = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (self.options.parseUserAgent === true &amp;&amp; !self.useragent)</span>
+<span class="cstat-no" title="statement not covered" >            self.useragent = useragent.lookup(user_agent);</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.get_model = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.make_sure_parser_was_executed();</span>
+<span class="cstat-no" title="statement not covered" >        if (self.useragent)</span>
+<span class="cstat-no" title="statement not covered" >            return self.useragent.device.family;</span>
+<span class="cstat-no" title="statement not covered" >        return '';</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.get_type = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        var ua = user_agent;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!ua || ua === '') {</span>
+            // No user agent.
+<span class="cstat-no" title="statement not covered" >            return self.options.emptyUserAgentDeviceType;</span>
+        }
+        // overwrite Flipboard user agent otherwise it's detected as a desktop
+<span class="cstat-no" title="statement not covered" >        if (ua.match(/FlipboardProxy/i))</span>
+<span class="cstat-no" title="statement not covered" >            ua = 'FlipboardProxy/1.1;  http://flipboard.com/browserproxy';</span>
+<span class="cstat-no" title="statement not covered" >        if (ua.match(/Applebot/i))</span>
+<span class="cstat-no" title="statement not covered" >            ua = 'Applebot/0.1;  http://www.apple.com/go/applebot';</span>
+<span class="cstat-no" title="statement not covered" >        if (ua.match(/GoogleTV|SmartTV|SMART-TV|Internet TV|NetCast|NETTV|AppleTV|boxee|Kylo|Roku|DLNADOC|hbbtv|CrKey|CE\-HTML/i)) {</span>
+            // if user agent is a smart TV - http://goo.gl/FocDk
+<span class="cstat-no" title="statement not covered" >            return 'tv';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Xbox|PLAYSTATION (3|4)|Wii/i)) {</span>
+            // if user agent is a TV Based Gaming Console
+<span class="cstat-no" title="statement not covered" >            return 'tv';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/QtCarBrowser/i)) {</span>
+            // if the user agent is a car
+<span class="cstat-no" title="statement not covered" >            return self.options.carUserAgentDeviceType;;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Googlebot/i)) {</span>
+            // if user agent is a BOT/Crawler/Spider
+<span class="cstat-no" title="statement not covered" >            return self.options.botUserAgentDeviceType;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/iP(a|ro)d/i) || (ua.match(/tablet/i) &amp;&amp; !ua.match(/RX-34/i)) || ua.match(/FOLIO/i)) {</span>
+            // if user agent is a Tablet
+<span class="cstat-no" title="statement not covered" >            return 'tablet';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Linux/i) &amp;&amp; ua.match(/Android/i) &amp;&amp; !ua.match(/Fennec|mobi|HTC Magic|HTCX06HT|Nexus One|SC-02B|fone 945/i)) {</span>
+            // if user agent is an Android Tablet
+<span class="cstat-no" title="statement not covered" >            return 'tablet';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Kindle/i) || (ua.match(/Mac OS/i) &amp;&amp; ua.match(/Silk/i)) || (ua.match(/AppleWebKit/i) &amp;&amp; ua.match(/Silk/i) &amp;&amp; !ua.match(/Playstation Vita/i))) {</span>
+            // if user agent is a Kindle or Kindle Fire
+<span class="cstat-no" title="statement not covered" >            return 'tablet';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/GT-P10|SC-01C|SHW-M180S|SGH-T849|SCH-I800|SHW-M180L|SPH-P100|SGH-I987|zt180|HTC( Flyer|_Flyer)|Sprint ATP51|ViewPad7|pandigital(sprnova|nova)|Ideos S7|Dell Streak 7|Advent Vega|A101IT|A70BHT|MID7015|Next2|nook/i) || (ua.match(/MB511/i) &amp;&amp; ua.match(/RUTEM/i))) {</span>
+            // if user agent is a pre Android 3.0 Tablet
+<span class="cstat-no" title="statement not covered" >            return 'tablet';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/BOLT|Fennec|Iris|Maemo|Minimo|Mobi|mowser|NetFront|Novarra|Prism|RX-34|Skyfire|Tear|XV6875|XV6975|Google Wireless Transcoder/i)) {</span>
+            // if user agent is unique phone User Agent
+<span class="cstat-no" title="statement not covered" >            return 'phone';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Opera/i) &amp;&amp; ua.match(/Windows NT 5/i) &amp;&amp; ua.match(/HTC|Xda|Mini|Vario|SAMSUNG\-GT\-i8000|SAMSUNG\-SGH\-i9/i)) {</span>
+            // if user agent is an odd Opera User Agent - http://goo.gl/nK90K
+<span class="cstat-no" title="statement not covered" >            return 'phone';</span>
+        } else <span class="cstat-no" title="statement not covered" >if ((ua.match(/Windows (NT|XP|ME|9)/) &amp;&amp; !ua.match(/Phone/i)) &amp;&amp; !ua.match(/Bot|Spider|ia_archiver|NewsGator/i) || ua.match(/Win( ?9|NT)/i)) {</span>
+            // if user agent is Windows Desktop
+<span class="cstat-no" title="statement not covered" >            return 'desktop';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Macintosh|PowerPC/i) &amp;&amp; !ua.match(/Silk/i)) {</span>
+            // if agent is Mac Desktop
+<span class="cstat-no" title="statement not covered" >            return 'desktop';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Linux/i) &amp;&amp; ua.match(/X11/i) &amp;&amp; !ua.match(/Charlotte|JobBot/i)) {</span>
+            // if user agent is a Linux Desktop
+<span class="cstat-no" title="statement not covered" >            return 'desktop';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/CrOS/)) {</span>
+            // if user agent is a Chrome Book
+<span class="cstat-no" title="statement not covered" >            return 'desktop';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Solaris|SunOS|BSD/i)) {</span>
+            // if user agent is a Solaris, SunOS, BSD Desktop
+<span class="cstat-no" title="statement not covered" >            return 'desktop';</span>
+        } else <span class="cstat-no" title="statement not covered" >if (ua.match(/Mozilla\/5\.0 \(\)|jack|Applebot|FlipboardProxy|Go 1.1 package|HTMLParser|simplereach|python-requests|ShowyouBot|MetaURI|nineconnections|(^Java\/[0-9._]*)|Commons-HttpClient|InAGist|HTTP-Java-Client|curl|Wget|Bot|B-O-T|Crawler|Spider|Spyder|Yahoo|ia_archiver|Covario-IDS|findlinks|DataparkSearch|larbin|Mediapartners-Google|NG-Search|Snappy|Teoma|Jeeves|Charlotte|NewsGator|TinEye|Cerberian|SearchSight|Zao|Scrubby|Qseero|PycURL|Pompos|oegp|SBIder|yoogliFetchAgent|yacy|webcollage|VYU2|voyager|updated|truwoGPS|StackRambler|Sqworm|silk|semanticdiscovery|ScoutJet|Nymesis|NetResearchServer|MVAClient|mogimogi|Mnogosearch|Arachmo|Accoona|holmes|htdig|ichiro|webis|LinkWalker|lwp-trivial|facebookexternalhit|monit\/|ELB-HealthChecker\/|JobBot|GoogleCloudMonitoring/i) &amp;&amp; !ua.match(/phone|Playstation/i)) {</span>
+            // if user agent is a BOT/Crawler/Spider
+<span class="cstat-no" title="statement not covered" >            return self.options.botUserAgentDeviceType;</span>
+        } else {
+            // Otherwise assume it is a phone Device
+<span class="cstat-no" title="statement not covered" >            return self.options.unknownUserAgentDeviceType;</span>
+        }
+    };
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function parse(useragent, options) {</span>
+<span class="cstat-no" title="statement not covered" >    var parser = new DeviceParser(useragent, options);</span>
+<span class="cstat-no" title="statement not covered" >    var type = parser.get_type();</span>
+<span class="cstat-no" title="statement not covered" >    var model = parser.get_model();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var device = {</span>
+        parser: parser, // to expose the device parser object to the running app
+        type: type,
+        model: model,
+        is: <span class="fstat-no" title="function not covered" >function (t) {</span>
+<span class="cstat-no" title="statement not covered" >            return type === t;</span>
+        }
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return device;</span>
+}
+&nbsp;
+exports = module.exports = parse;
+exports.useragent_is = parse; // for backwards compatibility
+exports.version = require('../package').version;
+exports.Parser = DeviceParser;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Mon Apr 17 2017 18:19:38 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
