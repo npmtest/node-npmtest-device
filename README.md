@@ -1,4 +1,7 @@
-# test coverage for  [device (v0.3.8)](https://github.com/rguerreiro/device#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-device.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-device) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-device.svg)](https://travis-ci.org/npmtest/node-npmtest-device)
+# npmtest-device
+
+#### basic test coverage for  [device (v0.3.8)](https://github.com/rguerreiro/device#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-device.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-device) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-device.svg)](https://travis-ci.org/npmtest/node-npmtest-device)
+
 #### Device type detection library based on the useragent string. Refactored from express-device.
 
 [![NPM](https://nodei.co/npm/device.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/device)
